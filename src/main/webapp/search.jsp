@@ -1,16 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="lee" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <style type="text/css">
-  .py-1,.pu-2{
-  	text-align: center;
-  }
-
-  
-  </style>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -52,10 +44,6 @@
           </div>
           
             <div class="row">                
-              
-              <lee:favorite/>
-              
-              
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
@@ -63,23 +51,23 @@
                     <table class="table table-bordered">
                       <thead>
                         <tr>
-                          <th style="text-align: center;"> 번호 </th>
-                          <th style="text-align: center;"> 종목명 </th>
-                          <th style="text-align: center;"> 현재가 </th>
-                          <th style="text-align: center;"> 전일비 </th>
-                          <th style="text-align: center;"> 등락률 </th>
-                          <th style="text-align: center;"> 거래량 </th>                          
+                          <th> 번호 </th>
+                          <th> 종목명 </th>
+                          <th> 현재가 </th>
+                          <th> 전일비 </th>
+                          <th> 등락률 </th>
+                          <th> 거래량 </th>                          
                         </tr>
                       </thead>
                       <tbody>
                       <c:forEach var="s" items="${sdatas }">
                         <tr>
-                          <td class="py-1" style="text-align: center;"> <a href="detail.do?spk=${s.spk}&mid=${mdata.mid}">${s.spk}</a></td>
-                          <td style="text-align: center;"> ${s.sname } </td>
-                          <td style="text-align: right;"> ${s.snprice }원</td>
-                          <td style="text-align: right;"> ${s.sypriceupdown }원</td>
-                          <td style="text-align: right;"> ${s.snpercent }%</td>
-                          <td style="text-align: right;"> ${s.sntrade }개</td>
+                          <td class="py-1"> <a href="detail.do?spk=${s.spk }">${s.spk }</a></td>
+                          <td> ${s.sname } </td>
+                          <td> ${s.snprice }</td>
+                          <td> ${s.sypriceupdown } </td>
+                          <td> ${s.snpercent } </td>
+                          <td> ${s.sntrade } </td>
                         </tr>
                        </c:forEach>
 

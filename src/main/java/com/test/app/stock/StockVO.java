@@ -4,11 +4,21 @@ public class StockVO {
 	private int spk;
 	private String sname;
 	private int snprice;
+	private int snowprice;
 	private int sypriceupdown;
 	private double snpercent;
 	private int sntrade;
 	private int sstate;
+	private String searchCondition;
 	
+	
+	
+	public int getSnowprice() {
+		return snowprice;
+	}
+	public void setSnowprice(int snowprice) {
+		this.snowprice = snowprice;
+	}
 	public int getSpk() {
 		return spk;
 	}
@@ -52,10 +62,17 @@ public class StockVO {
 		this.sstate = sstate;
 	}
 	
+	public String getSearchCondition() {
+		return searchCondition;
+	}
+	public void setSearchCondition(String searchCondition) {
+		this.searchCondition = searchCondition;
+	}
 	@Override
 	public String toString() {
-		return "StockVO [spk=" + spk + ", sname=" + sname + ", snprice=" + snprice + ", sypriceupdown=" + sypriceupdown
-				+ ", snpercent=" + snpercent + ", sntrade=" + sntrade + ", sstate=" + sstate + "]";
+		return "StockVO [spk=" + spk + ", sname=" + sname + ", snprice=" + snprice + ", snowprice=" + snowprice
+				+ ", sypriceupdown=" + sypriceupdown + ", snpercent=" + snpercent + ", sntrade=" + sntrade + ", sstate="
+				+ sstate + ", searchCondition=" + searchCondition + "]";
 	}
 	
 	

@@ -45,52 +45,40 @@
                   <div class="card-body">
                     <h4 class="card-title">Basic form elements</h4>
                     <p class="card-description"> Basic form elements </p>
-                    <form class="forms-sample">
+                    
+                    <form class="forms-sample" action="insertMember.do" method="post">
                       <div class="form-group">
                         <label for="exampleInputName1">ID</label>
-                        <input type="text" class="form-control" id="id" placeholder="id">
+                        <input type="text" class="form-control" id="mid" name="mid" placeholder="id" required>
                       </div>
                       <div class="form-group">
                         <label for="exampleInputEmail3">Name</label>
-                        <input type="email" class="form-control" id="name" placeholder="name">
+                        <input type="text" class="form-control" id="mname" name="mname" placeholder="name" required>
                       </div>
                       <div class="form-group">
                         <label for="exampleInputPassword4">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="password">
+                        <input type="password" class="form-control" id="mpassword" name="mpassword" placeholder="password" required>
                       </div>
                       <div class="form-group">
-                        <label for="exampleSelectGender">Bank</label>
-                        <select class="form-control" id="bank">
-                     		<option>은행</option>
-                      		<option>우리은행</option>
-                      		<option>국민은행</option>
-                      		<option>신한은행</option>
-                      		<option>카카오뱅크</option>
-                        </select>
+                        <label for="exampleInputPassword4">Password Check</label>
+                        <input type="password" class="form-control" id="mpassword2" name="mpassword2" placeholder="password check" required>
                       </div>
                       <div class="form-group">
                         <label for="exampleInputPassword4">Account</label>
-                        <input type="password" class="form-control" id=""account"" placeholder="account">
+                        <input type="text" class="form-control" id="maccount" name="maccount" placeholder="account" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword4">Phone</label>
+                        <input type="text" class="form-control" id="mphone" name="mphone" placeholder="phone" required>
                       </div>
                       
-<!-- 삭제할까 넣을까 고민중 -->
-                      <div class="form-group">
-                        <label>File upload</label>
-                        <input type="file" name="img[]" class="file-upload-default">
-                        <div class="input-group col-xs-12">
-                          <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
-                          <span class="input-group-append">
-                            <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
-                          </span>
-                        </div>
-                      </div>
 <!-- END -->
 					  <div class="form-check">
                      	 <label class="form-check-label text-muted">
                          <input type="checkbox" class="form-check-input"> 개인정보 처리 약관 동의 </label>
                       </div>
-                      <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                      <button class="btn btn-light">Cancel</button>
+                      <input type="submit" class="btn btn-primary mr-2" onclick="signin_check();"value="Submit">
+                      <button class="btn btn-light" onclick="location.href='main.do'">Cancel</button>
                     </form>
                   </div>
                 </div>
@@ -115,6 +103,102 @@
       </div>
       <!-- page-body-wrapper ends -->
     </div>
+    <!--  회원가입 유효성
+     <script type="text/javascript">
+      function signin_check() {
+
+         var upw = document.getElementById("mpassword");
+         var upw2 = document.getElementById("mpassword2");
+
+         var name = document.getElementById("mname");
+         var mid = document.getElementById("mid");
+
+         var handphone = document.getElementById("mphone");
+
+         var checkboxp = document.getElementById("policyp");
+         var checkboxs = document.getElementById("policys");
+
+         //값을 입력하지 않았을때 alert창
+         if (name.value == "") {
+            alert("이름을 입력하세요.");
+            name.focus();
+            return false; //아래코드부터 진행되지 않도록
+         }
+
+         var pattern_num = /[0-9]/;
+         var pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/;
+
+         if (name.value.indexOf(" ") >= 0 || pattern_spc.test(name.value)
+               || pattern_num.test(name.value)) {
+            alert("한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)");
+            name.focus();
+            return false; //아래코드부터 진행되지 않도록
+         }
+
+
+         if (mid.value == "") {
+            alert("아이디를 입력하세요.");
+            mid.focus();
+            return false;
+         }
+         
+         if (upw.value == "") {
+            alert("비밀번호를 입력하세요.");
+            upw.focus();
+            return false;
+         }
+
+         var upwReg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+
+         if (!upwReg.test(upw.value)) {
+            alert("8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
+            upw.focus();
+            return false;
+         }
+         if (upw2.value == "") {
+            alert("비밀번호 확인란을 입력하세요.");
+            upw2.focus();
+            return false;
+         }
+         if (upw.value != upw2.value) {
+            alert("비밀번호가 일치하지 않습니다.");
+            upw2.focus();
+            return false;
+         }
+
+         if (handphone.value == "") {
+            alert("핸드폰번호를 입력하세요.");
+            handphone.focus();
+            return false;
+         }
+         var handphoneReg = /^(?=.*[0-9]).{11}$/;
+
+         if (!handphoneReg.test(handphone.value)) {
+            alert("형식에 맞지 않는 번호입니다.");
+            handphone.focus();
+            return false;
+         }
+
+         if (phonecheck.value == "") {
+            alert("핸드폰 인증번호를 입력하세요.");
+            phonecheck.focus();
+            return false;
+         }
+
+         if(!checkboxp.checked){
+            alert("개인정보처리는 필수동의 사항입니다.");
+            return false;
+        }
+         if(!checkboxs.checked){
+            alert("서비스약관은 필수동의 사항입니다.");
+            return false;
+         }
+         
+         alert("회원가입을 축하드립니다!!");
+         location.href = 'signin.jsp';
+      }
+   </script> -->
+    
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="assets/vendors/js/vendor.bundle.base.js"></script>

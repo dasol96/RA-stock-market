@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -31,24 +32,25 @@
             <div class="col-lg-4 mx-auto">
               <div class="auth-form-light text-left p-5">
                 <div class="brand-logo">
-                  <img src="assets/images/logo-dark.svg">
+                  <img src="assets/images/logoblack.png">
                 </div>
-                <h4>Hello! let's get started</h4>
-                <h6 class="font-weight-light">Sign in to continue.</h6>
-                <form class="pt-3">
+                <h4><spring:message code="message.signin.loginMsg"/></h4>
+                <h6 class="font-weight-light"><spring:message code="message.signin.login"/>.</h6>
+                
+                <form class="pt-3" action="login.do" method="post">
                   <div class="form-group">
-                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
+                    <input type="text" class="form-control form-control-lg" id="mid" name="mid" placeholder="id">
                   </div>
                   <div class="form-group">
-                    <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                    <input type="password" class="form-control form-control-lg" id="mpassword" name="mpassword" placeholder="Password">
                   </div>
                   <div class="mt-3">
-                    <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="index.html">SIGN IN</a>
+                    <input type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" value="SIGN IN">
                   </div>
-                  <div class="my-2 d-flex justify-content-between align-items-center">
+                 <!-- 시간 남으면<div class="my-2 d-flex justify-content-between align-items-center">
                     <a href="#" class="auth-link text-black">Forgot password?</a>
-                  </div>
-                  <div class="text-center mt-4 font-weight-light"> Don't have an account? <a href="signup.jsp" class="text-primary">Create</a>
+                  </div> --> 
+                  <div class="text-center mt-4 font-weight-light"> <spring:message code="message.signin.createAccountMsg"/>? <a href="signup.jsp" class="text-primary"><spring:message code="message.signin.create"/></a>
                   </div>
                 </form>
               </div>

@@ -30,64 +30,37 @@
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
-            <div class="page-header">
-              <h3 class="page-title"> Form elements </h3>
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Forms</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Form elements</li>
-                </ol>
-              </nav>
-            </div>
             <div class="row">
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Basic form elements</h4>
-                    <p class="card-description"> Basic form elements </p>
-                    <form class="forms-sample">
+                    <h4 class="card-title">회원 정보 수정</h4>
+                   
+                    <form class="forms-sample" action="updateMember.do" method="post">
                       <div class="form-group">
                         <label for="exampleInputName1">ID</label>
-                        <input type="text" class="form-control" id="id" placeholder="id">
+                        <input type="text" class="form-control" id="mid" name="mid" value="${mdata.mid }" readonly>
                       </div>
                       <div class="form-group">
                         <label for="exampleInputEmail3">Name</label>
-                        <input type="email" class="form-control" id="name" placeholder="name">
+                        <input type="text" class="form-control" id="mname" name="mname" value="${mdata.mname }">
                       </div>
                       <div class="form-group">
                         <label for="exampleInputPassword4">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="password">
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleSelectGender">Bank</label>
-                        <select class="form-control" id="bank">
-                     		<option>은행</option>
-                      		<option>우리은행</option>
-                      		<option>국민은행</option>
-                      		<option>신한은행</option>
-                      		<option>카카오뱅크</option>
-                        </select>
+                        <input type="password" class="form-control" id="mpassword" name="mpassword" value="${mdata.mpassword }">
                       </div>
                       <div class="form-group">
                         <label for="exampleInputPassword4">Account</label>
-                        <input type="password" class="form-control" id=""account"" placeholder="account">
+                        <input type="text" class="form-control" id="maccount" name="maccount" value="${mdata.maccount }">
                       </div>
-                      
-<!-- 삭제할까 넣을까 고민중 -->
                       <div class="form-group">
-                        <label>File upload</label>
-                        <input type="file" name="img[]" class="file-upload-default">
-                        <div class="input-group col-xs-12">
-                          <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
-                          <span class="input-group-append">
-                            <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
-                          </span>
-                        </div>
+                        <label for="exampleInputPassword4">Phone</label>
+                        <input type="text" class="form-control" id="mphone" name="mphone" value="${mdata.mphone }">
                       </div>
-<!-- END -->
-
-                      <button type="submit" class="btn btn-primary mr-2">수정하기</button>
-                      <button class="btn btn-light">회원 탈퇴하기</button>
+                      <div style="text-align: right;">
+                      <input type="submit" class="btn btn-primary mr-2" value="수정하기">
+                      <button class="btn btn-light" onclick="location.href='deleteMember.do?mid=${mdata.mid}'">회원 탈퇴하기</button>
+                    </div>
                     </form>
                   </div>
                 </div>

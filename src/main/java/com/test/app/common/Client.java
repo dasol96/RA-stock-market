@@ -8,7 +8,7 @@ import com.test.app.stock.impl.StockDAO;
 public class Client {
 	public static void main(String[] args) {
 		StockDAO stockDAO = new StockDAO();
-		ArrayList<StockVO> datas = new Crawling().startdb();
-		stockDAO.insert(datas);
+		//ArrayList<StockVO> datas = new Crawling().startdb();
+		//stockDAO.insert(datas);
 	}
 }

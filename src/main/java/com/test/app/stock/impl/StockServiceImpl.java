@@ -2,11 +2,16 @@ package com.test.app.stock.impl;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.test.app.stock.StockService;
 import com.test.app.stock.StockVO;
 
+@Service("stockService")
 public class StockServiceImpl implements StockService{
-
+	
+	@Autowired
 	private StockDAO stockdao;	
 	
 	@Override
@@ -28,22 +33,22 @@ public class StockServiceImpl implements StockService{
 	}
 
 	@Override
-	public void update_sstate(StockVO vo) {
+	public void insert() {
 		// TODO Auto-generated method stub
-		stockdao.update_sstate(vo);
+		 stockdao.insert();
 	}
 
 	@Override
-	public void insert(ArrayList<StockVO> datas) {
+	public void update_snprice(StockVO vo) {
 		// TODO Auto-generated method stub
-		stockdao.insert(datas);
+		
 	}
 
-	@Override
-	public StockVO selectOne_crwaling(ArrayList<StockVO> datas) {
-		// TODO Auto-generated method stub
-		return stockdao.selectOne_crwaling(datas);
-	}
+//	@Override 업데이트
+//	public StockVO selectOne_crwaling() {
+//		// TODO Auto-generated method stub
+//		return stockdao.selectOne_crwaling();
+//	}
 
 	
 	//update delete 새로 만들어야함!

@@ -9,4 +9,5 @@ public interface HaveService {
 	public void update2_have(HaveVO vo);
 	public HaveVO selectOne(HaveVO vo);
 	public ArrayList<HaveVO> selectAll(HaveVO vo);
+	public void update_nowprice(HaveVO vo);
 }

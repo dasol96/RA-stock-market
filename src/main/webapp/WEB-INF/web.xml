@@ -23,6 +23,17 @@
     <servlet-name>DispatcherServlet</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  
+    <!-- 리스너 설정할때 applicationContext.xml 추가 안하고 경로 설정 -->
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+<!-- 리스너 추가 -->
+  <listener>
+     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
 	
 
 </web-app>

@@ -20,7 +20,7 @@ import com.test.app.stock.StockVO;
 public class Crawling {
 	Connection conn;
 	PreparedStatement pstmt;
-	final String sql="insert into stock values((select nvl(max(spk),0)+1 from stock),?,?,?,?,?,?)";
+	final String sql="insert into stock values((select nvl(max(spk),0)+1 from stock),?,?,?,?,?,?,?)";
 
 	public ArrayList<StockVO> startdb() {
 		conn=JDBCUtil.connect();
@@ -37,9 +37,9 @@ public class Crawling {
 		Elements eles=doc.select("tbody>tr"); 
 		Iterator<Element> itr2=eles.select("a").iterator();
 		Iterator<Element> itr3=eles.select("td.number").iterator();
-
+		StockVO svo = null;
 		while(itr3.hasNext()) {
-			StockVO svo = new StockVO();
+			svo = new StockVO();
 			String n = itr2.next().text();
 			svo.setSname(n);//종목명
 			int a = Integer.parseInt(itr3.next().text().replace(",", "").replace("%","").replace("+", ""));
@@ -52,18 +52,10 @@ public class Crawling {
 			svo.setSntrade(d);
 			svo.setSstate(0);
 			int e = Integer.parseInt(itr3.next().text().replace(",", "").replace("%","").replace("+", ""));
-			System.out.println("현재가 :"+a);
-			System.out.println("전일비 :"+b);
-			System.out.println("등락률 :"+c);
-			System.out.println("거래량 :"+d);
-			System.out.println("매도호가 :"+e);
 			datas.add(svo);
 		}
-		System.out.println("크롤링 성공!");
 		return datas;
+		
+		
 	}
-
-
-
-
-}
+	 }

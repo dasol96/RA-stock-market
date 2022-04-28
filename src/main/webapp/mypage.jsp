@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -35,52 +36,28 @@
                 <div class="card">
                   <div class="card-body">
                   <!-- 인출기능 -->
-	                <h4 class="card-title">내 지갑</h4>
+	                <h4 class="card-title">${mdata.mid } 님의 지갑</h4>
 	                <hr>
-	                <select class="btn btn-inverse-info btn-fw">
-	                	<option>입금</option>
-	                	<option>인출</option>
+	                <form action="takeMoney.do?mid=${mdata.mid }" method="post">
+	                <input type="hidden" name=mmoney value=${mdata.mmoney }>
+	                <select class="btn btn-inverse-primary btn-fw" name="inOrOut" style="margin-top: -5px;">
+	                	<option value="0" style="cursor: pointer;" >선택</option>
+	                	<option value="1" style="cursor: pointer;" >입금</option>
+	                	<option value="2" style="cursor: pointer;" >인출</option>
 	                </select>
-	                <input type="text" placehold="입금/출금할 금액을 입력하세요">
-	                <input type="submit" value="확인">
+	                <input type="text" class="blockquote" placeholder="입금/출금할 금액을 입력하세요" name="inOrOutMoney" style="width:520px; height:40px;">
+	                <input type="submit"class="btn btn-primary" value="확인" style="margin-top: -7px; margin-left:5px;">
+	                </form>
 	                <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Bordered table</h4>
-                    <p class="card-description"> Add class <code>.table-bordered</code>
+                    <h5 class="card-title">현재 보유 자금</h5>
                     </p>
                     <table class="table table-bordered">
-                      <thead>
-                        <tr>
-                          <th> # </th>
-                          <th> 보유중인 돈</th>
-                          <th> 보유중인 주식 이름</th>
-                          <th> 보유중인 주식 갯수 </th>
-                          <th> Deadline </th>
-                        </tr>
-                      </thead>
+
                       <tbody>
                         <tr>
-                          <td> 1 </td>
-                          <td> Herman Beck </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td> $ 77.99 </td>
-                          <td> May 15, 2015 </td>
-                        </tr>
-                        <tr>
-                          <td> 2 </td>
-                          <td> Messsy Adam </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td> $245.30 </td>
-                          <td> July 1, 2015 </td>
+                          <td> ${mdata.mmoney } 원</td>
                         </tr>
                       </tbody>
                     </table>
@@ -89,100 +66,38 @@
               </div>
                   
                   	<hr>
-                    <h4 class="card-title">OOO님의 보유종목 List</h4>
+                    <h4 class="card-title">${mdata.mid }님의 보유 종목 List</h4>
                     </p>
                     <table class="table table-bordered">
                       <thead>
                         <tr>
-                          <th> 번호 </th>
-                          <th> 종목명 </th>
-                          <th> 현재가 </th>
-                          <th> 전일비 </th>
-                          <th> 등락률 </th>
-                          <th> 거래량 </th>                          
+                          <th style="text-align: center;"> 번호 </th>
+                          <th style="text-align: center;"> 종목명 </th>
+                          <th style="text-align: center;"> 소유 갯수 </th>
+                          <th style="text-align: center;"> 구매가 </th>
+                          <th style="text-align: center;"> 현재가 </th>                      
                         </tr>
                       </thead>
                       <tbody>
+                        <c:forEach var="h" items="${hdatas}">
                         <tr>
-                          <td> 1 </td>
-                          <td> Herman Beck </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td> $ 77.99 </td>
-                          <td> May 15, 2015 </td>
-                          <td> May 15, 2015 </td>
+                          <td style="text-align: center;"> <a href="detail.do?spk=${h.hpk}&mid=${mdata.mid}">${h.hpk}</a> </td>
+                          <td style="text-align: center;"> ${h.hsname} </td>
+                          <td style="text-align: right;"> ${h.hscnt} </td>
+                          <td style="text-align: right;"> ${h.hsbuyprice} </td>
+							<c:choose>
+								<c:when test="${h.hsnowprice==0 }">
+									<td style="text-align: right;">-</td>
+								</c:when>
+								<c:otherwise>
+                          		<td style="text-align: right;"> ${h.hsnowprice} </td>
+                          		</c:otherwise>
+							</c:choose>
+                        </tr>
+                        </c:forEach>
                         </tr>
                         <!-- 여기서부터도 foreach로 삭제 예정 -->
-                        <tr>
-                          <td> 2 </td>
-                          <td> Messsy Adam </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td> $245.30 </td>
-                          <td> July 1, 2015 </td>
-                          <td> July 1, 2015 </td>
-                        </tr>
-                        <tr>
-                          <td> 3 </td>
-                          <td> John Richards </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td> $138.00 </td>
-                          <td> Apr 12, 2015 </td>
-                        </tr>
-                        <tr>
-                          <td> 4 </td>
-                          <td> Peter Meggik </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td> $ 77.99 </td>
-                          <td> May 15, 2015 </td>
-                        </tr>
-                        <tr>
-                          <td> 5 </td>
-                          <td> Edward </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-danger" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td> $ 160.25 </td>
-                          <td> May 03, 2015 </td>
-                        </tr>
-                        <tr>
-                          <td> 6 </td>
-                          <td> John Doe </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td> $ 123.21 </td>
-                          <td> April 05, 2015 </td>
-                        </tr>
-                        <tr>
-                          <td> 7 </td>
-                          <td> Henry Tom </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td> $ 150.00 </td>
-                          <td> June 16, 2015 </td>
-                        </tr>
+                        
                       </tbody>
                     </table>
                   </div>

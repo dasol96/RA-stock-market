@@ -2,11 +2,13 @@ package com.test.app.have;
 
 public class HaveVO {
 	private int hpk;
-	private String hmid;
+	private String mid; 
 	private String hsname;
 	private int hscnt;
 	private int hsbuyprice;
 	private int hsnowprice;
+	private int moneyCondition;
+	private int moneykeyword;
 	
 	public int getHpk() {
 		return hpk;
@@ -14,11 +16,11 @@ public class HaveVO {
 	public void setHpk(int hpk) {
 		this.hpk = hpk;
 	}
-	public String getHmid() {
-		return hmid;
+	public String getMid() {
+		return mid;
 	}
-	public void setHmid(String hmid) {
-		this.hmid = hmid;
+	public void setMid(String hmid) {
+		this.mid = hmid;
 	}
 	public String getHsname() {
 		return hsname;
@@ -44,10 +46,25 @@ public class HaveVO {
 	public void setHsnowprice(int hsnowprice) {
 		this.hsnowprice = hsnowprice;
 	}
+	
+	public int getMoneyCondition() {
+		return moneyCondition;
+	}
+	public void setMoneyCondition(int moneyCondition) {
+		this.moneyCondition = moneyCondition;
+	}
+
+	public int getMoneykeyword() {
+		return moneykeyword;
+	}
+	public void setMoneykeyword(int moneykeyword) {
+		this.moneykeyword = moneykeyword;
+	}
 	@Override
 	public String toString() {
-		return "HaveVO [hpk=" + hpk + ", hmid=" + hmid + ", hsname=" + hsname + ", hscnt=" + hscnt + ", hsbuyprice="
-				+ hsbuyprice + ", hsnowprice=" + hsnowprice + "]";
+		return "HaveVO [hpk=" + hpk + ", mid=" + mid + ", hsname=" + hsname + ", hscnt=" + hscnt + ", hsbuyprice="
+				+ hsbuyprice + ", hsnowprice=" + hsnowprice + ", moneyCondition=" + moneyCondition + ", moneykeyword="
+				+ moneykeyword + "]";
 	}
 
 	

@@ -2,11 +2,16 @@ package com.test.app.have.impl;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.test.app.have.HaveService;
 import com.test.app.have.HaveVO;
 
+@Service("haveService")
 public class HaveServiceImpl implements HaveService{
-
+	
+	@Autowired
 	private HaveDAO havedao;
 	
 	@Override
@@ -43,6 +48,12 @@ public class HaveServiceImpl implements HaveService{
 	public ArrayList<HaveVO> selectAll(HaveVO vo) {
 		// TODO Auto-generated method stub
 		return havedao.selectAll(vo);
+	}
+
+	@Override
+	public void update_nowprice(HaveVO vo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

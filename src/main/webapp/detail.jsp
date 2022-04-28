@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,150 +31,81 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="row">
-
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Striped Table</h4>
-                    <p class="card-description"> Add class <code>.table-striped</code>
-                    </p>
+                    <h4 class="card-title">상세 주식 정보 &ensp;&ensp;<button type="button" class="btn btn-inverse-primary btn-rounded btn-icon" onclick="location.href='updatecrw.do?spk=${sdata.spk}&mid=${mdata.mid}'">
+                       	 <i class="mdi mdi-sync"></i>
+                   	 	</button></h4>
+                     
+                    	
+                  
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th> User </th>
-                          <th> First name </th>
-                          <th> Progress </th>
-                          <th> Amount </th>
-                          <th> Deadline </th>
+                          <th style="text-align: center;"> 즐겨찾기 </th>
+                          <th style="text-align: center;"> 번호 </th>
+                          <th style="text-align: center;"> 종목명 </th>
+                          <th style="text-align: center;"> 현재가 </th>
+                          <th style="text-align: center;"> 전일비 </th>
+                          <th style="text-align: center;"> 등락률 </th>
+                          <th style="text-align: center;"> 거래량 </th>     
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td class="py-1">
-                            <img src="assets/images/faces-clipart/pic-1.png" alt="image" />
+                        <td class="py-1"><a href="infav.do?spk=${sdata.spk}&mid=${mdata.mid}">
+                        	&ensp;&ensp;&ensp;&ensp;<i class="mdi mdi-heart" id="favoritebtn"></i>       	
+                          </a>
                           </td>
-                          <td> Herman Beck </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td> $ 77.99 </td>
-                          <td> May 15, 2015 </td>
+                          <td style="text-align: center;"> ${sdata.spk } </td>
+                          <td style="text-align: center;"> ${sdata.sname } </td>
+                          <td style="text-align: right;"> ${sdata.snprice }원 </td>
+                          <td style="text-align: right;"> ${sdata.sypriceupdown }원 </td>
+                          <td style="text-align: right;"> ${sdata.snpercent }% </td>
+                          <td style="text-align: right;"> ${sdata.sntrade }개 </td>
                         </tr>
                         <tr>
-                          <td class="py-1">
-                            <img src="assets/images/faces-clipart/pic-2.png" alt="image" />
-                          </td>
-                          <td> Messsy Adam </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td> $245.30 </td>
-                          <td> July 1, 2015 </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="assets/images/faces-clipart/pic-3.png" alt="image" />
-                          </td>
-                          <td> John Richards </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td> $138.00 </td>
-                          <td> Apr 12, 2015 </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="assets/images/faces-clipart/pic-4.png" alt="image" />
-                          </td>
-                          <td> Peter Meggik </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td> $ 77.99 </td>
-                          <td> May 15, 2015 </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="assets/images/faces-clipart/pic-1.png" alt="image" />
-                          </td>
-                          <td> Edward </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-danger" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td> $ 160.25 </td>
-                          <td> May 03, 2015 </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="assets/images/faces-clipart/pic-2.png" alt="image" />
-                          </td>
-                          <td> John Doe </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td> $ 123.21 </td>
-                          <td> April 05, 2015 </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="assets/images/faces-clipart/pic-3.png" alt="image" />
-                          </td>
-                          <td> Henry Tom </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td> $ 150.00 </td>
-                          <td> June 16, 2015 </td>
-                        </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
               </div>
-              
+              <div class="card-body" style="padding:0px;">
+              <form action="buyOrSellStock.do" method="post">
+              <input type="hidden" name="hpk" value="${sdata.spk}">
+              <input type="hidden" name="mid" value="${mdata.mid}">
+              <input type="hidden" name="spk" value="${sdata.spk}">
+              <input type="hidden" name="hscnt" value="${hdata.hscnt}">
               <div class="col-lg-12 stretch-card">
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Table with contextual classes</h4>
-					
+
 					<!-- 매수 가능금액 -->
 					<div class="template-demo">
-						<h3>매수 가능 금액 : </h3>
+						<h3>매수 가능 금액 : ${mdata.mmoney}</h3>
 					</div>
 					<!-- 매도 가능갯수 -->
 					<div class="template-demo">
-						<h3>매도 가능 갯수 : </h3>
+						<h3>매도 가능 갯수 : ${hdata.hscnt }</h3>
 					</div>
                     <!-- 매수 매도 -->
-                    <div class="template-demo">
-                    <select class="btn btn-inverse-info btn-fw" name="saleOrBuy" style="cursor:pointer">
-                    		<option style="cursor: pointer;" value="ptitle">매수</option>
-							<option style="cursor: pointer;" value="pmid">매도</option>
+                    <div class="template-demo" style="margin-top:20px;">
+                    <select class="btn btn-inverse-primary btn-fw" name="moneyCondition" style="cursor:pointer">
+                    		<option style="cursor: pointer;" value="1">매수</option>
+							<option style="cursor: pointer;" value="2">매도</option>
 					</select>
-					<form action="">
-					<input type="text" class="btn btn-outline-info btn-fw" placeholder="입력">
-					<input type="submit" class="btn btn-info btn-icon-text"value="선택">
-                    </form>
-                    	</div>
+					
+					<input type="text" class="blockquote" name="moneykeyword" placeholder="갯수를 입력하세요" style="width: 480px; height: 40px;">
+					<input type="submit" class="btn btn-primary" value="선택" style="margin-top:-8px; margin-left:11px; ">
+                   
+                    </div>
                   </div>
                 </div>
               </div>
-              
-              
+               </form>
+              </div>
               
              
           <!-- content-wrapper ends -->
@@ -204,6 +136,10 @@
     <script src="assets/js/misc.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
-    <!-- End custom js for this page -->
+    <!-- End custom js for this page  -->
+      
+      
+    
+
   </body>
 </html>
