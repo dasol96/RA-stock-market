@@ -8,4 +8,5 @@ public interface MemberService {
 	public void update_mmoneyplus(MemberVO vo);
 	public void update_mmoneyminus(MemberVO vo);
 	public MemberVO selectOne2(MemberVO vo);
+	public void update_mmoneyminus_buyOrSell(MemberVO mvo);
 }

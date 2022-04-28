@@ -4,31 +4,40 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.test.app.have.HaveService;
 import com.test.app.have.HaveVO;
-import com.test.app.have.impl.HaveDAO;
+import com.test.app.member.MemberService;
 import com.test.app.member.MemberVO;
-import com.test.app.member.impl.MemberDAO;
+import com.test.app.stock.StockService;
 import com.test.app.stock.StockVO;
-import com.test.app.stock.impl.StockDAO;
 
 @Controller
 public class HaveController { //moneykeyword가 안들어옴
 	
+	@Autowired
+	private StockService stockService;	
+	@Autowired
+	private HaveService haveService;
+	@Autowired
+	private MemberService memberService;
+	
+	
 	@RequestMapping(value="/buyOrSellStock.do") //옵션값이 buy라면
-	public String buyStock(HaveVO hvo,HaveDAO havedao,StockVO svo,StockDAO stockdao,MemberVO mvo,MemberDAO memberdao,Model model,HttpSession session) {
+	public String buyStock(HaveVO hvo,StockVO svo,MemberVO mvo,Model model,HttpSession session) {
 		System.out.println();
 		System.out.println("로그 : HAVECONTROLLER.DO 실행 moneyCondition = "+hvo.getMoneyCondition());
 		System.out.println("로그 : HAVECONTROLLER.DO 실행 moneyKeyword = "+hvo.getMoneykeyword());
 		System.out.println("로그 : HAVECONTROLLER.DO 실행 "+hvo.getHpk()+" "+hvo.getMid());
 		//hvo=havedao.selectOne(hvo);	//새로 hvo 하면서 moneyCondition이 0으로 바뀜			
 		//System.out.println("로그 : HAVECONTROLLER.DO hvo : "+hvo); //// 여기서 null이 뜸
-		mvo=memberdao.selectOne(mvo);
+		mvo=memberService.selectOne(mvo);
 		System.out.println("로그 : HAVECONTROLLER.DO mvo : "+mvo);
-		svo=stockdao.selectOne(svo);
+		svo=stockService.selectOne(svo);
 		System.out.println("로그 : HAVECONTROLLER.DO svo : "+svo);
 		System.out.println("로그 : HAVECONTROLLER.DO MoneyCondition : "+hvo.getMoneyCondition());
 		
@@ -47,7 +56,7 @@ public class HaveController { //moneykeyword가 안들어옴
 			hvo.setHpk(svo.getSpk());
 			hvo.setMid(mvo.getMid());
 			System.out.println("=========전 = "+hvo);
-			hvo=havedao.selectOne(hvo);
+			hvo=haveService.selectOne(hvo);
 			System.out.println("=========후 = "+hvo);
 			System.out.println("======후=====hvo.getMoneykeyword확인 = "+cnt);
 			// 이미 데이터가 한번생성된바있어
@@ -64,13 +73,13 @@ public class HaveController { //moneykeyword가 안들어옴
 //				System.out.println("로그 : HAVECONTROLLER.DO BUY : 60번쨰 줄 getHsbuyprice = "+hvo.getHsbuyprice());//
 				hvo.setHsnowprice(svo.getSnowprice());
 				hvo.setHscnt(cnt);
-				havedao.update1_have(hvo);
+				haveService.update1_have(hvo);
 				System.out.println("로그 : HAVECONTROLLER.DO BUY : 64번쨰 줄 hvo = "+hvo);
 				System.out.println("로그 : HAVECONTROLLER.DO : update 수행");
 				//금액 구하는 식 cnt * price
 				int totalMoney = mvo.getMmoney()- (cnt * svo.getSnprice());
 				mvo.setMmoney(totalMoney);
-				memberdao.update_mmoneyminus_buyOrSell(mvo);
+				memberService.update_mmoneyminus_buyOrSell(mvo);
 			}
 			else {//만약에 datas에 spk가 없다면
 				HaveVO hvo1 = new HaveVO();
@@ -89,7 +98,7 @@ public class HaveController { //moneykeyword가 안들어옴
 				System.out.println("로그 : HAVECONTROLLER.DO : spk"+svo.getSpk());
 				System.out.println("로그 : HAVECONTROLLER.DO : hsbuyprice"+hvo.getHsbuyprice());
 				System.out.println("로그 : HAVECONTROLLER.DO : snpirce"+svo.getSnprice());
-				havedao.insert_have(hvo);
+				haveService.insert_have(hvo);
 				System.out.println("====================로그 :======= HAVECONTROLLER : hvo 확인1 = "+hvo);
 				//금액 구하는 식 cnt * price
 				System.out.println();
@@ -100,10 +109,10 @@ public class HaveController { //moneykeyword가 안들어옴
 				mvo.setMmoney(totalMmoney);
 				System.out.println("로그 : HAVECONTROLLER : totlamoney = "+totalMmoney);
 				System.out.println("로그 : HAVECONTROLLER : mvo = "+mvo);
-				memberdao.update_mmoneyminus_buyOrSell(mvo);
+				memberService.update_mmoneyminus_buyOrSell(mvo);
 				
 			}
-			hvo=havedao.selectOne(hvo);
+			hvo=haveService.selectOne(hvo);
 			System.out.println("====================로그 :======= HAVECONTROLLER : hvo 확인2 = "+hvo);
 			model.addAttribute("hdata", hvo);
 			}
@@ -124,49 +133,49 @@ public class HaveController { //moneykeyword가 안들어옴
 				
 				hvo.setHscnt(hvo.getMoneykeyword());
 				System.out.println("로그 : HAVECONTROLLER : hvo set = "+hvo.getHpk()+hvo.getHsnowprice()+hvo.getHscnt());
-				havedao.update2_have(hvo);
+				haveService.update2_have(hvo);
 				//금액 구하는식 cnt * price
 				int totalMmoney = mvo.getMmoney()+ (hvo.getMoneykeyword()*hvo.getHsnowprice());
 				mvo.setMmoney(totalMmoney);
-				memberdao.update_mmoneyminus_buyOrSell(mvo);
+				memberService.update_mmoneyminus_buyOrSell(mvo);
 			}
 			else if(hvo.getHscnt()==hvo.getMoneykeyword()){ // 풀로 다 팔면
 				hvo.setHpk(svo.getSpk());
 				hvo.setHsbuyprice(svo.getSnprice());
 				hvo.setHsnowprice(svo.getSnowprice());
 				hvo.setHscnt(hvo.getMoneykeyword());
-				havedao.update2_have(hvo);
+				haveService.update2_have(hvo);
 				//금액 구하는식 cnt * price
 				int totalMmoney = mvo.getMmoney()+ (hvo.getMoneykeyword()*hvo.getHsnowprice());
 				mvo.setMmoney(totalMmoney);
-				memberdao.update_mmoneyminus_buyOrSell(mvo);
-				havedao.delete_have(hvo);
+				memberService.update_mmoneyminus_buyOrSell(mvo);
+				haveService.delete_have(hvo);
 
 			} else {
 				System.out.println("팔지 못하는 상태");
 			}
 		}
 
-		ArrayList<HaveVO> datas = havedao.selectAll(hvo);
+		ArrayList<HaveVO> datas = haveService.selectAll(hvo);
 		model.addAttribute("hdatas", datas);
 		
-		mvo = memberdao.selectOne(mvo);
+		mvo = memberService.selectOne(mvo);
 		session.setAttribute("mdata", mvo);
 		
 		return "mypage.do";
 	}
 	
 	@RequestMapping(value="/hsnowpriceupdate.do") //옵션값이 buy라면
-	public String hsnowpriceupdate(HaveVO hvo,HaveDAO havedao,StockVO svo,StockDAO stockdao,MemberVO mvo,MemberDAO memberdao,Model model,HttpSession session) {
+	public String hsnowpriceupdate(HaveVO hvo,StockVO svo,Model model,HttpSession session) {
 		//hpk hsnowprice
-		System.out.println("로그 : HaveController : hsnowpriceupdate.do "+ svo.getSpk());
-		System.out.println("로그 : HaveController : hsnowpriceupdate.do "+ svo.getSnowprice());
+		System.out.println("로그 : HaveController : hsnowpriceupdate.do spk= "+ svo.getSpk());
+		System.out.println("로그 : HaveController : hsnowpriceupdate.do snowprice= "+ svo.getSnowprice());
 		
-		svo=stockdao.selectOne(svo);
+		svo=stockService.selectOne(svo);
 		hvo.setHsnowprice(svo.getSnowprice());
 		hvo.setHpk(svo.getSpk());
 		
-		havedao.update_nowprice(hvo);
+		haveService.update_nowprice(hvo);
 		
 		return "detail.do";
 		

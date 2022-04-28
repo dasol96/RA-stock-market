@@ -41,7 +41,13 @@ public class StockServiceImpl implements StockService{
 	@Override
 	public void update_snprice(StockVO vo) {
 		// TODO Auto-generated method stub
-		
+		stockdao.update_snprice(vo);
+	}
+
+	@Override
+	public int checkCrawling(StockVO vo) {
+		// TODO Auto-generated method stub
+		return stockdao.checkCrawling(vo);
 	}
 
 //	@Override 업데이트

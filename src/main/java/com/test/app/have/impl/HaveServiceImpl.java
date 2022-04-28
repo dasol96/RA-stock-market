@@ -53,7 +53,7 @@ public class HaveServiceImpl implements HaveService{
 	@Override
 	public void update_nowprice(HaveVO vo) {
 		// TODO Auto-generated method stub
-		
+		havedao.update_nowprice(vo);
 	}
 
 }

@@ -50,14 +50,13 @@ public class FavoriteDAO {
 	   }
 	   
 	   public ArrayList<StockVO> selectAll_SF(FavoriteVO vo){
-		   ArrayList<StockVO> datas = null;
+		   ArrayList<StockVO> datas = new ArrayList<StockVO>();
 		   conn=JDBCUtil.connect();
 		   try {
 			pstmt=conn.prepareStatement(selectAll_SF);
 			pstmt.setString(1, vo.getMid());
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				datas = new ArrayList<StockVO>();
 				StockVO data = new StockVO();
 				data.setSpk(rs.getInt("spk"));
 				data.setSname(rs.getString("sname"));

@@ -84,13 +84,15 @@ public class StockDAO {
 	}
 	
 	public int checkCrawling(StockVO vo){
+		System.out.println("★★★★★로그 : STOCKDAO : checkCrawling 시작");
 		conn=JDBCUtil.connect();
 		Crawling cw = new Crawling();
 		ArrayList<StockVO> datas = cw.startdb();
 		for(StockVO v:datas) {
-			System.out.println("로그 : STOCKDAO checkCrawling v = "+v); // 해당 pk번호로 들어오고..
-			System.out.println("로그 : STOCKDAO checkCrawling datas = "+datas); // 모든 리스트 나오고
-			System.out.println("로그 : STOCKDAO checkCrawling if문 밖 vo.getSname = "+vo.getSname()+" v.getSname "+v.getSname()); // 모든 리스트 나오고				
+			System.out.println("★★★★★로그 : STOCKDAO : checkCrawling for문 들어옴");
+//			System.out.println("로그 : STOCKDAO checkCrawling v = "+v); // 해당 pk번호로 들어오고..
+//			System.out.println("로그 : STOCKDAO checkCrawling datas = "+datas); // 모든 리스트 나오고
+//			System.out.println("로그 : STOCKDAO checkCrawling if문 밖 vo.getSname = "+vo.getSname()+" v.getSname "+v.getSname()); // 모든 리스트 나오고				
 			if(vo.getSname().equals(v.getSname())) {
 				System.out.println("로그 : STOCKDAO checkCrawling if문 안 vo.getSname = "+vo.getSname()+" v.getSname "+v.getSname()); // 모든 리스트 나오고				
 				vo.setSnowprice(v.getSnprice());
@@ -120,47 +122,7 @@ public class StockDAO {
 	   }
 	   
 	
-//	public StockVO selectOne_crawling(StockVO vo) {
-//		StockVO data = null;
-//		Crawling cw= new Crawling();
-//		ArrayList<StockVO> datas=cw.startdb();  
-//		conn=JDBCUtil.connect();
-//		try {
-//			pstmt.setInt(1, vo.getSpk());
-//			if(datas.contains((Object)vo.getSname())) { //크롤링한 데이터가 sname을 포함한다면
-//				pstmt=conn.prepareStatement(update); // 업데이트 진행
-//				pstmt.setString(1, vo.getSname());
-//				pstmt.setInt(2, vo.getSnprice());
-//				pstmt.setInt(3, vo.getSypriceupdown());
-//				pstmt.setDouble(4, vo.getSnpercent());
-//				pstmt.setInt(5, vo.getSntrade());
-//				pstmt.setInt(6, vo.getSpk());
-//				pstmt.executeUpdate();
-//				System.out.println("SDAO로그: 있어서 update 진행");
-//				//여기서도 data가 나와야 반환을 하는데...
-//			}
-//			 // 아니라면 그냥 selectone 실행할거야(유지)
-//			pstmt=conn.prepareStatement(selectOne_crwaling);
-//			rs=pstmt.executeQuery();
-//			if(rs.next()) {
-//				data = new StockVO();
-//				data.setSpk(rs.getInt("spk"));
-//				data.setSname(rs.getString("sname"));
-//				data.setSnprice(rs.getInt("snprice"));
-//				data.setSypriceupdown(rs.getInt("sypriceupdown"));
-//				data.setSnpercent(rs.getDouble("snpercent"));
-//				data.setSntrade(rs.getInt("sntrade"));
-//				data.setSstate(rs.getInt("sstate"));
-//				}
-//			rs.close();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} finally {
-//			JDBCUtil.disconnect(pstmt, conn);
-//		}
-//		return data;	
-//	}
+
 	
 	public ArrayList<StockVO> selectAll_sname(StockVO vo){
 		System.out.println("==========로그 : STOCKDAO 검색로직 들어옴");

@@ -58,4 +58,10 @@ public class MemberServiceImpl implements MemberService{
 		return memberdao.selectOne2(vo);
 	}
 
+	@Override
+	public void update_mmoneyminus_buyOrSell(MemberVO mvo) {
+		memberdao.update_mmoneyminus_buyOrSell(mvo);
+		
+	}
+
 }
