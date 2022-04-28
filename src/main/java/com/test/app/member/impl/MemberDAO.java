@@ -15,7 +15,7 @@ public class MemberDAO {
 	   private Connection conn=null;
 	   private PreparedStatement pstmt=null;
 	   private ResultSet rs=null;
-	   private final String insert_member="insert into member(mid,mname,mpassword,maccount,mphone) values(?,?,?,?,?)";
+	   private final String insert_member="insert into member(mid,mname,mpassword,maccount,mphone,filename) values(?,?,?,?,?,?)";
 	   private final String update_member="update member set mname=?,mpassword=?,maccount=?,mphone=? where mid=?";
 	   private final String delete_member="delete member where mid=?";
 	   private final String selectOne_member="select * from member where mid=?";
@@ -34,6 +34,7 @@ public class MemberDAO {
 				pstmt.setString(3, vo.getMpassword());
 				pstmt.setString(4, vo.getMaccount());
 				pstmt.setString(5, vo.getMphone());
+				pstmt.setString(6, vo.getFilename());
 				pstmt.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -92,6 +93,7 @@ public class MemberDAO {
 					data.setMmoney(rs.getInt("mmoney"));
 					data.setMaccount(rs.getString("maccount"));
 					data.setMphone(rs.getString("mphone"));
+					data.setFilename(rs.getString("filename"));
 				}
 				System.out.println("로그 : MemberDAO selectOne mname = "+data.getMname());
 				rs.close();
@@ -120,6 +122,7 @@ public class MemberDAO {
 					data.setMmoney(rs.getInt("mmoney"));
 					data.setMaccount(rs.getString("maccount"));
 					data.setMphone(rs.getString("mphone"));
+					data.setFilename(rs.getString("filename"));
 				}
 				System.out.println("로그 : MemberDAO selectOne mname = "+data.getMname());
 				rs.close();

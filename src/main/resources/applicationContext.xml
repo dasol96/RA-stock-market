@@ -22,5 +22,14 @@
 	<context:component-scan base-package="com.test.app"/>
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
+  <!-- Mybatis 설정 -->
+   <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="dataSource" ref="dataSource" />
+      <property name="configLocation" value="classpath:sql-map-config.xml" />
+   </bean>
+   <bean class="org.mybatis.spring.SqlSessionTemplate">
+      <constructor-arg ref="sqlSession" />
+   </bean>
+
 
 </beans>

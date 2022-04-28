@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="StockDAO">
+
+	<select id="selectOne" resultType="stock">
+		<![CDATA[
+			SELECT * FROM STOCK WHERE SPK=#{spk}
+		]]>
+	</select>
+	
+	<select id="selectAll_sname" resultType="stock">
+		<![CDATA[
+			SELECT * FROM STOCK WHERE SNAME LIKE '%'||#{searchCondition}||'%'
+		]]>
+	</select>
+	
+	<select id="selectAll" resultType="stock">
+		<![CDATA[
+			SELECT * FROM STOCK
+		]]>
+	</select>
+	
+	<insert id="insert">
+		<![CDATA[
+			INSERT INTO STOCK VALUES((SELECT NVL(MAX(SPK),0)+1 FROM STOCK),#{sname},#{snprice},#{snowprice},#{sypriceupdown},#{snpercent},#{sntrade},#{sstate})
+		]]>
+	</insert>
+	
+	<update id="update_snprice">
+		<![CDATA[
+			UPDATE STOCK SET SNPRICE=#{snprice},SYPRICEUPDOWN=#{sypriceupdown},SNPERCENT=#{snpercent},SNOWPRICE=#{snowprice} WHERE SPK=#{spk}
+		]]>
+	</update>
+
+
+</mapper>

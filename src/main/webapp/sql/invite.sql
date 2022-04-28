@@ -5,7 +5,8 @@ create table member(
 	mpassword varchar(30) not null,
 	maccount varchar(30) not null,
 	mphone varchar(30) not null,
-	mmoney int default 0
+	mmoney int default 0,
+	filename varchar(100)
 );
 
 create table stock(

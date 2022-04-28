@@ -1,6 +1,6 @@
 package com.test.app.stock.impl;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import com.test.app.stock.StockVO;
 public class StockServiceImpl implements StockService{
 	
 	@Autowired
-	private StockDAO stockdao;	
+	private StockDAO3 stockdao;	
 	
 	@Override
 	public StockVO selectOne(StockVO vo) {
@@ -21,15 +21,15 @@ public class StockServiceImpl implements StockService{
 	}
 
 	@Override
-	public ArrayList<StockVO> selectAll_sname(StockVO vo) {
+	public List<StockVO> selectAll_sname(StockVO vo) {
 		// TODO Auto-generated method stub
 		return stockdao.selectAll_sname(vo);
 	}
 
 	@Override
-	public ArrayList<StockVO> selectAll(StockVO vo) {
+	public List<StockVO> selectAll(StockVO vo) {
 		// TODO Auto-generated method stub
-		return stockdao.selectAll(vo);
+		return  stockdao.selectAll(vo);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.test.app.controller.member;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.test.app.have.HaveService;
 import com.test.app.have.HaveVO;
@@ -34,7 +37,7 @@ public class MemberController {
 	public String login(MemberVO vo,HttpSession session) {
 		vo=memberService.selectOne2(vo);
 		if(vo==null) {
-			System.out.println("로그 : MemberController : login 정보"+vo);
+			//System.out.println("로그 : MemberController : login 정보"+vo);
 			return "redirect:signin.jsp";
 		}
 		else {
@@ -50,9 +53,19 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/insertMember.do")
-	public String insertMember(MemberVO vo) {
+	public String insertMember(MemberVO vo) throws IllegalStateException, IOException {
+		System.out.println("insertMember 사진넣기 시작");
+		MultipartFile uploadFile = vo.getUploadFile();
+		if(!uploadFile.isEmpty()) {
+			String name = uploadFile.getOriginalFilename();
+			vo.setUploadFile(uploadFile);
+			vo.setFilename(name);
+			System.out.println("파일명: "+name);
+			uploadFile.transferTo(new File("C:\\LEE\\workspace\\t_project06_5_v1.2_file\\src\\main\\webapp\\images\\"+name));
+		}
+		System.out.println("insertMember 사진넣기 성공");
 		memberService.insert_member(vo);
-		System.out.println("로그 : MemberController : 회원가입 성공!"+vo);
+		//System.out.println("로그 : MemberController : 회원가입 성공!"+vo);
 		return "signinlang.do";
 	}
 	
@@ -62,8 +75,8 @@ public class MemberController {
 		hvo.setMid(vo.getMid());
 		ArrayList<HaveVO> datas = haveService.selectAll(hvo); //mid 필요
 		vo=memberService.selectOne(vo);
-		System.out.println("로그 : MEMBERCONTROLLER delete.do hvo datas 확인 = "+datas); 
-		System.out.println("로그 : MEMBERCONTROLLER delete.do mvo 확인 = "+vo); // 보유 금액으로도 필터링 해야함 
+		//System.out.println("로그 : MEMBERCONTROLLER delete.do hvo datas 확인 = "+datas); 
+		//System.out.println("로그 : MEMBERCONTROLLER delete.do mvo 확인 = "+vo); // 보유 금액으로도 필터링 해야함 
 		
 		if(datas.size()!=0|| vo.getMmoney()!=0) {//주식이 있거나 mmoney가 있을때
 			System.out.println("탈퇴 불가");
@@ -78,10 +91,10 @@ public class MemberController {
 	
 	@RequestMapping(value="/setting.do")
 	public String setting(MemberVO vo,Model model) {
-		System.out.println("로그 : MemberController : setting.do 실행 vo="+vo+vo.getMid());
+		//System.out.println("로그 : MemberController : setting.do 실행 vo="+vo+vo.getMid());
 		vo=memberService.selectOne(vo);
 		model.addAttribute("mdata", vo);
-		System.out.println("로그 : MemberController : setting.do update vo = "+vo);
+		//System.out.println("로그 : MemberController : setting.do update vo = "+vo);
 		return "setting.jsp";
 	}
 	
@@ -89,7 +102,7 @@ public class MemberController {
 	public String update(MemberVO vo) {
 		System.out.println("로그 : MemberController : setting.do 실행");
 		memberService.update_member(vo);
-		System.out.println("로그 : MemberController : setting.do update vo = "+vo);
+		//System.out.println("로그 : MemberController : setting.do update vo = "+vo);
 		return "setting.do";
 	}
 	
@@ -117,12 +130,22 @@ public class MemberController {
 	
 	@RequestMapping(value="/mypage.do")
 	public String mypage(MemberVO vo,HaveVO hvo,Model model,HttpSession session,StockVO svo) {
-		System.out.println("로그 : MemberController : mypage.do"+vo.getMid());
+//		System.out.println("로그 : MemberController : mypage.do"+vo.getMid());
 		hvo.setMid(vo.getMid());
+//		System.out.println("로그 : MemberController : mypage.do"+vo);
+		//hvo.setHsnowprice(svo.getSnowprice());
+		//hvo=havedao.selectOne(hvo);
+		
+		
+		System.out.println("로그 : MemberController : mypage.do svo.getnowprice = "+svo);		
+		System.out.println("로그 : MemberController : mypage.do hvo.getnowprice = "+hvo);	
+		
 		hvo.setHsnowprice(svo.getSnowprice());
 		haveService.update_nowprice(hvo);
 		ArrayList<HaveVO> datas=haveService.selectAll(hvo);
-
+		System.out.println("로그 : MemberController : mypage.do datas = "+datas);
+		
+		
 		model.addAttribute("hdatas", datas);
 		return "mypage.jsp";
 	}

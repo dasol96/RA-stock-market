@@ -168,8 +168,8 @@ public class HaveController { //moneykeyword가 안들어옴
 	@RequestMapping(value="/hsnowpriceupdate.do") //옵션값이 buy라면
 	public String hsnowpriceupdate(HaveVO hvo,StockVO svo,Model model,HttpSession session) {
 		//hpk hsnowprice
-		System.out.println("로그 : HaveController : hsnowpriceupdate.do spk= "+ svo.getSpk());
-		System.out.println("로그 : HaveController : hsnowpriceupdate.do snowprice= "+ svo.getSnowprice());
+		System.out.println("로그 : HaveController : hsnowpriceupdate.do "+ svo.getSpk());
+		System.out.println("로그 : HaveController : hsnowpriceupdate.do "+ svo.getSnowprice());
 		
 		svo=stockService.selectOne(svo);
 		hvo.setHsnowprice(svo.getSnowprice());

@@ -18,6 +18,12 @@
 <!-- .xml > @으로 변경하기 -->
 <context:component-scan base-package="com.test.app.controller"/>
 
+<!-- 파일 업로드 설정 -->
+<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<property name="maxUploadSize" value="-1"></property>
+</bean>
+
+
 <!-- 메세지 파일을 읽어오는 클래스 -->
 <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
    <property name="basenames">
@@ -36,7 +42,7 @@
    </bean>
 </mvc:interceptors>
 
-<!-- 에러 페이지 설정 -->
+<!-- 에러 페이지 설정
 
 <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 	<property name="exceptionMappings">
@@ -48,7 +54,7 @@
 	</property>
 	<property name="defaultErrorView" value="error/error.jsp"/>
 </bean>
-
+ -->
 
 
 </beans>

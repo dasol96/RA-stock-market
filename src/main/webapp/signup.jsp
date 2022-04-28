@@ -46,7 +46,7 @@
                     <h4 class="card-title">Basic form elements</h4>
                     <p class="card-description"> Basic form elements </p>
                     
-                    <form class="forms-sample" action="insertMember.do" method="post">
+                    <form class="forms-sample" action="insertMember.do" method="post"  enctype="multipart/form-data">
                       <div class="form-group">
                         <label for="exampleInputName1">ID</label>
                         <input type="text" class="form-control" id="mid" name="mid" placeholder="id" required>
@@ -71,6 +71,12 @@
                         <label for="exampleInputPassword4">Phone</label>
                         <input type="text" class="form-control" id="mphone" name="mphone" placeholder="phone" required>
                       </div>
+                        <!-- 파일 업로드 -->
+                      <div class="form-group">
+                        <label for="exampleInputPassword4">Picture</label>
+                        <input type=file name="uploadFile">
+                      </div>
+	                  <!-- 파일 업로드 끝 -->
                       
 <!-- END -->
 					  <div class="form-check">

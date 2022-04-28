@@ -1,10 +1,11 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ attribute name="favorite"%>
 
 <c:choose>
-		<c:when test="${mdata.mid!=null and fdatas!=null}">
+		<c:when test="${fn:length(fdatas)!=0 and mdata.mid!=null}">
 			<div class="col-lg-12 grid-margin stretch-card">
 				<div class="card" style="margin-top: 20px;">
 					<div class="card-body">

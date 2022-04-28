@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappings.member-mapping">
+	
+	<select id="selectOne_member">
+		<![CDATA[
+			select * from member where mid=#{mid}
+		]]>
+	</select>
+	<select id="selectOne_member2">
+		<![CDATA[
+			select * from member where mid=#{mid}
+		]]>
+	</select>
+	<insert id="insert_member">
+		<![CDATA[
+			insert into member(mid,mname,mpassword,maccount,mphone) values(#{mid},#{mname},#{mpassword},#{maccount},#{mphone})
+		]]>
+	</insert>
+	<update id="update_member">
+		<![CDATA[
+			update member set mname=#{mname},mpassword=#{mpassword},maccount=#{maccount},mphone=#{mphone} where mid=#{mid}
+		]]>
+	</update>
+	<delete id="delete_member">
+		<![CDATA[
+			delete member where mid=#{mid}
+		]]>
+	</delete>
+	<update id="update_mmoneyplus">
+		<![CDATA[
+			update member set mmoney=mmoney+#{mmoney} where mid=#{mid}
+		]]>
+	</update>
+	<update id="update_mmoneyminus">
+		<![CDATA[
+			update member set mmoney=mmoney-#{mmoney} where mid=#{mid}
+		]]>
+	</update>
+	<update id="update_mmoneyminus_buyOrSell">
+		<![CDATA[
+			update member set mmoney=#{mmoney} where mid=#{mid}
+		]]>
+	</update>
+
+
+</mapper>

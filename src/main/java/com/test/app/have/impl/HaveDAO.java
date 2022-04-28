@@ -112,7 +112,7 @@ public class HaveDAO {
 			conn=JDBCUtil.connect();
 			try {
 				pstmt=conn.prepareStatement(selectOne_have);
-				System.out.println("로그 : HAVEDAO selectOne 실행 시작 : "+vo.getHpk()+" 2 "+vo.getMid());
+				//System.out.println("로그 : HAVEDAO selectOne 실행 시작 : "+vo.getHpk()+" 2 "+vo.getMid());
 				pstmt.setString(1, vo.getMid());
 				pstmt.setInt(2, vo.getHpk());
 				rs=pstmt.executeQuery();
@@ -124,7 +124,7 @@ public class HaveDAO {
 					data.setHsbuyprice(rs.getInt("hsbuyprice"));
 					data.setHsnowprice(rs.getInt("hsnowprice"));
 				}
-				System.out.println("로그 : HAVEDAO try문 안 :"+vo.getMid()+" | "+vo.getHpk()+" | "+data.getMid()+" | "+data.getHpk());
+				//System.out.println("로그 : HAVEDAO try문 안 :"+vo.getMid()+" | "+vo.getHpk()+" | "+data.getMid()+" | "+data.getHpk());
 				 // 지금 얘가 안뜸
 				rs.close();
 			} catch (SQLException e) {
@@ -133,7 +133,7 @@ public class HaveDAO {
 			}finally {
 				JDBCUtil.disconnect(pstmt, conn);
 			}
-			System.out.println("로그 : HAVEDAO select문 실행끝 : "+vo.getMid()+" | "+vo.getHpk());
+			//System.out.println("로그 : HAVEDAO select문 실행끝 : "+vo.getMid()+" | "+vo.getHpk());
 			return data;
 		}
 		public ArrayList<HaveVO> selectAll(HaveVO vo){

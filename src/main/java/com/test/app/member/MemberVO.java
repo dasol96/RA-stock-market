@@ -1,5 +1,7 @@
 package com.test.app.member;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class MemberVO {
 	private String mid;
 	private String mname;
@@ -11,8 +13,21 @@ public class MemberVO {
 	private int inOrOutMoney;
 	private int moneyCondition;
 	private int buyOrSell;
+	private MultipartFile uploadFile;
+	private String filename;
 	
-	
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 	public String getMid() {
 		return mid;
 	}
