@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+<!-- DS를 위한 스프링 컨테이너를 위한 설정파일.
+	init()이 자동호출될적에 필요 -->
+	<!-- ViewResolver만들기 id필수!!(~~Resolver가 많기때문에), viewResolver를 찾기때문에 id를 viewResolver를 바꿔선 안된다!-->
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">
+	<property name="prefix" value="/WEB-INF/view/"></property>
+	<property name="suffix" value=".jsp"></property>
+</bean>
+
+
+</beans>
