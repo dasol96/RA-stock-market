@@ -91,29 +91,16 @@ public class HaveController { //moneykeyword가 안들어옴
 				hvo.setHsbuyprice(svo.getSnprice());
 				hvo.setHsnowprice(svo.getSnowprice());
 				hvo.setHscnt(cnt);
-				System.out.println("로그 : HAVECONTROLLER.DO : hcnt"+cnt);
-				System.out.println("로그 : HAVECONTROLLER.DO : hmid"+hvo.getMid());
-				System.out.println("로그 : HAVECONTROLLER.DO : mid"+mvo.getMid());
-				System.out.println("로그 : HAVECONTROLLER.DO : hpk"+hvo.getHpk());
-				System.out.println("로그 : HAVECONTROLLER.DO : spk"+svo.getSpk());
 				System.out.println("로그 : HAVECONTROLLER.DO : hsbuyprice"+hvo.getHsbuyprice());
 				System.out.println("로그 : HAVECONTROLLER.DO : snpirce"+svo.getSnprice());
 				haveService.insert_have(hvo);
-				System.out.println("====================로그 :======= HAVECONTROLLER : hvo 확인1 = "+hvo);
-				//금액 구하는 식 cnt * price
-				System.out.println();
-				System.out.println("=======로그 : HAVECONTROLLER.DO : 금액 구하기 시작=======");
-				System.out.println("로그 : hvo.getMoneyKeyword = "+cnt);
-				System.out.println("로그 : hvo.getHsbuyprice = "+hvo.getHsbuyprice());
 				int totalMmoney = mvo.getMmoney()- (cnt*hvo.getHsbuyprice());
 				mvo.setMmoney(totalMmoney);
 				System.out.println("로그 : HAVECONTROLLER : totlamoney = "+totalMmoney);
-				System.out.println("로그 : HAVECONTROLLER : mvo = "+mvo);
 				memberService.update_mmoneyminus_buyOrSell(mvo);
 				
 			}
 			hvo=haveService.selectOne(hvo);
-			System.out.println("====================로그 :======= HAVECONTROLLER : hvo 확인2 = "+hvo);
 			model.addAttribute("hdata", hvo);
 			}
 			else {
@@ -122,19 +109,13 @@ public class HaveController { //moneykeyword가 안들어옴
 			}
 		}
 		else {//매도 >> 판매한금액이 mmoney에 추가되어야함
-			System.out.println("============================================로그"+hvo.getHscnt());
 			if(hvo.getHscnt()>hvo.getMoneykeyword()) { //갯수가 남으면...
-				System.out.println("로그 : HAVECONTROLLER : 매도 : hcnt > cnt hvo = "+hvo);
-				System.out.println("로그 : HAVECONTROLLER : 매도 : hcnt > cnt Moneykeyword = "+hvo.getMoneykeyword());
 				//일단 현재가로 매도 가능하도록 구현
 				hvo.setHpk(svo.getSpk());
 				hvo.setHsbuyprice(svo.getSnprice());
 				hvo.setHsnowprice(svo.getSnowprice());
-				
 				hvo.setHscnt(hvo.getMoneykeyword());
-				System.out.println("로그 : HAVECONTROLLER : hvo set = "+hvo.getHpk()+hvo.getHsnowprice()+hvo.getHscnt());
 				haveService.update2_have(hvo);
-				//금액 구하는식 cnt * price
 				int totalMmoney = mvo.getMmoney()+ (hvo.getMoneykeyword()*hvo.getHsnowprice());
 				mvo.setMmoney(totalMmoney);
 				memberService.update_mmoneyminus_buyOrSell(mvo);
@@ -145,7 +126,6 @@ public class HaveController { //moneykeyword가 안들어옴
 				hvo.setHsnowprice(svo.getSnowprice());
 				hvo.setHscnt(hvo.getMoneykeyword());
 				haveService.update2_have(hvo);
-				//금액 구하는식 cnt * price
 				int totalMmoney = mvo.getMmoney()+ (hvo.getMoneykeyword()*hvo.getHsnowprice());
 				mvo.setMmoney(totalMmoney);
 				memberService.update_mmoneyminus_buyOrSell(mvo);

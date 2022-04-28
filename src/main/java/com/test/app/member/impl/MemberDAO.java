@@ -134,6 +134,7 @@ public class MemberDAO {
 			}
 			return data;
 		}
+		
 		public void update_mmoneyplus(MemberVO vo) {
 			conn=JDBCUtil.connect();
 			try {
@@ -163,6 +164,8 @@ public class MemberDAO {
 				JDBCUtil.disconnect(pstmt, conn);
 			}
 		}
+		
+		
 		public void update_mmoneyminus_buyOrSell(MemberVO vo) {//매수매도로 인한 금액 차감
 			conn=JDBCUtil.connect();
 			try {

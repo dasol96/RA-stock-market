@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="t_project06_5_v2.0_final_M4">
+	<class>com.test.app.favorite.FavoriteVO</class>
+	<class>com.test.app.stock.StockVO</class>
+		<!-- 필수!! -->
+		<properties> <!-- DBMS와 연동해서 사용할거기 때문에 Connection을 확보해야함 > 접속할 수 있는 접속가능 정보 -->
+			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+			<property name="javax.persistence.jdbc.user" value="lee2"/>
+			<property name="javax.persistence.jdbc.password" value="1234"/> 
+			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/> <!-- 표준어를 인지할 번역가가 필요 > dialect 설정 -->
+			
+			
+			<property name="hibernate.show_sql" value="true"/>
+			<!--<property name="hibernate.hbm2ddl.auto" value="create"/>-->
+		</properties>
+		<!-- 필수 속성이라고 해놓고 4개는 값을 안채워넣었다... spring을 쓰면서 dAtaSource 설정을 했기 때문에 직접 만들지 않고 연결할때 dataSource를 넣어줄거다..
+		지금도 스프링 연동하면 4개 지워줄거다..... -->
+	</persistence-unit>
+</persistence>

@@ -35,25 +35,18 @@ public class StockController {
 	
 	@RequestMapping(value="/data.do")
 	public String Alldata(StockVO vo,StockDAO stockdao) { 
-		//stockdao.insert();
+		stockdao.insert();
 		return "main.do";
 	}	
 	
 	@RequestMapping(value="/main.do")
-	public String selectAll(StockVO vo,FavoriteVO fvo,Model model, HttpSession session) { 
-		//System.out.println("로그 : StockController main.do | fvo 확인 : " + fvo);
-//		fvo=favoritedao.selectOne(fvo);
-//		System.out.println("로그 : STOCKCONTROLLER main.do fvo확인 = "+fvo);
+	public String selectAll(StockVO vo,FavoriteVO fvo,Model model, HttpSession session) {
 		if(fvo.getMid()!=null) {
-		//System.out.println("로그 : StockController main.do | if문 안에 들어옴");
 		ArrayList<StockVO> datas2 = favoriteService.selectAll_SF(fvo);
-		//System.out.println("로그 : StockController main.do | if문 안 datas2 = "+datas2);
 		model.addAttribute("fdatas", datas2);
 		}
-		
 		List<StockVO> datas = stockService.selectAll(vo);
 		model.addAttribute("sdatas", datas);
-		
 		return "main.jsp";
 	}
 	
@@ -81,22 +74,17 @@ public class StockController {
 	public String search(StockVO vo,Model model,HttpServletResponse response) throws IOException {
 		if(vo.getSearchCondition().equals(null)||vo.getSearchCondition().equals("")) {
 			List<StockVO> datas = stockService.selectAll(vo);
-			//System.out.println("로그 : STOCKCONTROLLER : search.do null이여서 if문 안으로 들어옴");
 			return "main.do";
 		}
 		List<StockVO> datas = stockService.selectAll_sname(vo);
-		//System.out.println("로그 : STOCKCONTROLLER : search.do datas = "+datas);
-		if(datas==null) { //stockDAO null로 수정해놨음 ArrayList datas = null로,,,
+		if(datas.size()==0) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('검색 결과가 없습니다.'); location.href='main.do';</script>");
 			out.flush();
 		}
-		//System.out.println("로그 : STOCKCONTROLLER : search.do searchCondition = "+vo.getSearchCondition());
-		//System.out.println("로그 SC:검색"+datas);
 		model.addAttribute("sdatas", datas);
 		return "search.jsp";
-
 	}
 	
 	@RequestMapping(value="/updatecrw.do")

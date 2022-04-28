@@ -50,7 +50,6 @@ public class Crawling_update {
 			svo.setSnpercent(c); // 등락률
 			int d = Integer.parseInt(itr3.next().text().replace(",", "").replace("%","").replace("+", ""));
 			svo.setSntrade(d);
-			svo.setSstate(0);
 			int e = Integer.parseInt(itr3.next().text().replace(",", "").replace("%","").replace("+", ""));
 			System.out.println("현재가 :"+a);
 			System.out.println("전일비 :"+b);
@@ -70,7 +69,6 @@ public class Crawling_update {
 					pstmt.setInt(3, vo.getSypriceupdown());
 					pstmt.setDouble(4, vo.getSnpercent());
 					pstmt.setInt(5, vo.getSntrade());
-					pstmt.setInt(6, vo.getSstate());
 					pstmt.executeUpdate();
 				}
 				System.out.println("로그:Crawling_update 성공");

@@ -21,7 +21,8 @@ public class FavoriteDAO {
 	   private final String insert_favorite="insert into favorite values((select nvl(max(fpk),0)+1 from favorite),?,?)";
 	   private final String delete_favorite="delete favorite where spk=?";
 	   private final String selectAll_favorite="select * from favorite where fpk=?";
-	   private final String selectAll_SF="select stock.* from stock join favorite on stock.spk = favorite.spk where mid=?";
+	   private final String selectAll_SF="select stock.* from stock join favorite on "
+	   												+ "stock.spk = favorite.spk where mid=?";
 	   //fk에 따른 spk > stock 정보 불러오기 위한 selectAll
 	   private final String selectOne="select * from favorite where mid=? and spk=?";
 	   
@@ -64,7 +65,6 @@ public class FavoriteDAO {
 				data.setSypriceupdown(rs.getInt("sypriceupdown"));
 				data.setSnpercent(rs.getDouble("snpercent"));
 				data.setSntrade(rs.getInt("sntrade"));
-				data.setSstate(rs.getInt("sstate"));
 				datas.add(data);
 			}
 		} catch (SQLException e) {

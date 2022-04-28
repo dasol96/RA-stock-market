@@ -1,6 +1,20 @@
 package com.test.app.stock;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name="STOCK")
 public class StockVO {
+	
+	private static final long serialVersionUID = 1L;
+	public StockVO() {
+		super();
+	}
+	
+	@Id
 	private int spk;
 	private String sname;
 	private int snprice;
@@ -8,7 +22,7 @@ public class StockVO {
 	private int sypriceupdown;
 	private double snpercent;
 	private int sntrade;
-	private int sstate;
+	@Transient
 	private String searchCondition;
 	
 	
@@ -55,12 +69,6 @@ public class StockVO {
 	public void setSntrade(int sntrade) {
 		this.sntrade = sntrade;
 	}
-	public int getSstate() {
-		return sstate;
-	}
-	public void setSstate(int sstate) {
-		this.sstate = sstate;
-	}
 	
 	public String getSearchCondition() {
 		return searchCondition;
@@ -71,8 +79,8 @@ public class StockVO {
 	@Override
 	public String toString() {
 		return "StockVO [spk=" + spk + ", sname=" + sname + ", snprice=" + snprice + ", snowprice=" + snowprice
-				+ ", sypriceupdown=" + sypriceupdown + ", snpercent=" + snpercent + ", sntrade=" + sntrade + ", sstate="
-				+ sstate + ", searchCondition=" + searchCondition + "]";
+				+ ", sypriceupdown=" + sypriceupdown + ", snpercent=" + snpercent + ", sntrade=" + sntrade 
+				+  ", searchCondition=" + searchCondition + "]";
 	}
 	
 	

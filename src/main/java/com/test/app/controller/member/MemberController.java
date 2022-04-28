@@ -54,18 +54,16 @@ public class MemberController {
 	
 	@RequestMapping(value="/insertMember.do")
 	public String insertMember(MemberVO vo) throws IllegalStateException, IOException {
-		System.out.println("insertMember 사진넣기 시작");
 		MultipartFile uploadFile = vo.getUploadFile();
 		if(!uploadFile.isEmpty()) {
 			String name = uploadFile.getOriginalFilename();
 			vo.setUploadFile(uploadFile);
 			vo.setFilename(name);
 			System.out.println("파일명: "+name);
-			uploadFile.transferTo(new File("C:\\LEE\\workspace\\t_project06_5_v1.2_file\\src\\main\\webapp\\images\\"+name));
+			uploadFile.transferTo(new File("C:\\LEE\\workspace\\t_project06_5_v2.0_final\\src\\main\\webapp\\images\\"+name));
 		}
-		System.out.println("insertMember 사진넣기 성공");
+		System.out.println("사진 출력 성공");
 		memberService.insert_member(vo);
-		//System.out.println("로그 : MemberController : 회원가입 성공!"+vo);
 		return "signinlang.do";
 	}
 	
@@ -106,7 +104,7 @@ public class MemberController {
 		return "setting.do";
 	}
 	
-	@RequestMapping(value="/takeMoney.do") //분리
+	@RequestMapping(value="/takeMoney.do")
 	public String takeMoney(MemberVO vo, HttpSession session) {
 		System.out.println("로그 : MemberController takeMoney"+vo.getMid()+vo.getInOrOutMoney()+vo.getInOrOut());
 		if(vo.getInOrOut()==2) { // 인출

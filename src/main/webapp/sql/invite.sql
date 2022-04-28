@@ -8,7 +8,6 @@ create table member(
 	mmoney int default 0,
 	filename varchar(100)
 );
-
 create table stock(
 	spk int primary key,
 	sname varchar(100) not null,
@@ -16,24 +15,18 @@ create table stock(
 	snowprice int default 0,
 	sypriceupdown int not null,
 	snpercent number(5,2) default 0.0,
-	sntrade int not null,
-	sstate int default 0
+	sntrade int not null
 );
-
 create table have(
 	hpk int primary key,
 	mid varchar(30) not null,
 	hsname varchar(100) not null,
 	hscnt int not null, 
 	hsbuyprice int not null,
---	hscnt2 int default 0,,
---	hsbuyprice2 int default 0, 
 	hsnowprice int default 0,
---	avg int 
 	foreign key (hpk) references stock(spk) on delete cascade,
 	foreign key (mid) references member(mid) on delete cascade
 );
-
 create table favorite(
 	fpk int primary key,
 	spk int not null,
@@ -59,7 +52,7 @@ select * from member where mid='hong';
 update member set mname='이다솔22',mpassword='1234',maccount='38465112',mphone='0703003000' where mid='dasol';
 update have hscnt=hscnt+3,hsbuyprice=(hsbuyprice+2500)/hscnt where hpk=
 insert into favorite values((select nvl(max(fpk),0)+1 from favorite),'1','이다솔');
-delete favorite where fpk=2;
+delete member where mid='lee';
 
 drop table favorite;
 drop table have;

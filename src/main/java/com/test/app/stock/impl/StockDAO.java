@@ -18,14 +18,11 @@ public class StockDAO {
 	   private PreparedStatement pstmt=null;
 	   private ResultSet rs=null;
 	   
-	   private final String insert="insert into stock values((select nvl(max(spk),0)+1 from stock),?,?,?,?,?,?,?)"; //초기 데이터
+	   private final String insert="insert into stock values((select nvl(max(spk),0)+1 from stock),?,?,?,?,?,?)"; //초기 데이터
 	   private final String selectOne="select * from stock where spk=?"; //상세페이지
-	   //private final String selectOne_crwaling="select * from stock where spk=?"; //상세페이지(새로고침 버튼 누르면 작동)
 	   private final String update_snprice="update stock set snprice=?,sypriceupdown=?,snpercent=?,snowprice=? where spk=?"; // 새로고침키 누르면 update
-	   
 	   private final String selectAll_sname="select * from stock where sname like '%'||?||'%'"; //검색
 	   private final String selectAll="select * from stock"; //모든 게시물 보기
-	   //private final String update_sstate="update stock set sstate=? where spk=?"; // 즐겨찾기 목록 상태업데이트
 	   
 	     
 	public StockVO selectOne(StockVO vo) {
@@ -45,7 +42,6 @@ public class StockDAO {
 				data.setSypriceupdown(rs.getInt("sypriceupdown"));
 				data.setSnpercent(rs.getDouble("snpercent"));
 				data.setSntrade(rs.getInt("sntrade"));
-				data.setSstate(rs.getInt("sstate"));
 			}
 			//System.out.println("로그 : STOCKDAO : selectOne : sname = "+data.getSname());
 			rs.close();
@@ -72,7 +68,6 @@ public class StockDAO {
 				pstmt.setInt(4, svo.getSypriceupdown());
 				pstmt.setDouble(5, svo.getSnpercent());
 				pstmt.setInt(6, svo.getSntrade());
-				pstmt.setInt(7, svo.getSstate());
 				pstmt.executeUpdate();
 			}
 			System.out.println("로그:Crawling.java DB 저장 성공");
@@ -190,7 +185,6 @@ public class StockDAO {
 				data.setSypriceupdown(rs.getInt("sypriceupdown"));
 				data.setSnpercent(rs.getDouble("snpercent"));
 				data.setSntrade(rs.getInt("sntrade"));
-				data.setSstate(rs.getInt("sstate"));
 				datas.add(data);
 			}
 			rs.close();
@@ -218,7 +212,6 @@ public class StockDAO {
 				data.setSypriceupdown(rs.getInt("sypriceupdown"));
 				data.setSnpercent(rs.getDouble("snpercent"));
 				data.setSntrade(rs.getInt("sntrade"));
-				data.setSstate(rs.getInt("sstate"));
 				datas.add(data);
 			}
 			rs.close();

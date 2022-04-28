@@ -30,10 +30,8 @@ public class Crawling {
 		try {
 			doc=Jsoup.connect(url).get();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		Elements eles=doc.select("tbody>tr"); 
 		Iterator<Element> itr2=eles.select("a").iterator();
 		Iterator<Element> itr3=eles.select("td.number").iterator();
@@ -50,12 +48,9 @@ public class Crawling {
 			svo.setSnpercent(c); // 등락률
 			int d = Integer.parseInt(itr3.next().text().replace(",", "").replace("%","").replace("+", ""));
 			svo.setSntrade(d);
-			svo.setSstate(0);
 			int e = Integer.parseInt(itr3.next().text().replace(",", "").replace("%","").replace("+", ""));
 			datas.add(svo);
 		}
 		return datas;
-		
-		
 	}
 	 }

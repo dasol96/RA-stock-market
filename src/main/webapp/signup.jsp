@@ -31,11 +31,10 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title"> Form elements </h3>
+              
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Forms</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Form elements</li>
+                 
                 </ol>
               </nav>
             </div>
@@ -43,8 +42,8 @@
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Basic form elements</h4>
-                    <p class="card-description"> Basic form elements </p>
+                    <h4 class="card-title">RA 투자증권</h4>
+                    <p class="card-description"> SignUp </p>
                     
                     <form class="forms-sample" action="insertMember.do" method="post"  enctype="multipart/form-data">
                       <div class="form-group">
